@@ -1,0 +1,6 @@
+.idea
+mlruns
+.venv
+models/mlruns
+models/mlartifacts
+app/__pycache__

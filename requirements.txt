@@ -1,0 +1,16 @@
+flask
+fastapi
+uvicorn[standard]
+scikit-learn
+numpy
+pandas
+mlflow
+jinja2
+pytest
+gunicorn
+requests
+httpx
+pika
+pika-stubs
+streamlit
+watchdog
