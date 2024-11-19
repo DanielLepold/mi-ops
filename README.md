@@ -2,6 +2,7 @@
 
 ## File structure
 
+```angular2html
 mi-ops/
 ├── app/                      # Application layer, including UI and server logic
 │   ├── __init__.py
@@ -19,4 +20,4 @@ mi-ops/
 ├── .gitignore                # Specifies files and directories to ignore in version control
 ├── README.md                 # Documentation about the project, including setup and usage instructions
 └── requirements.txt          # Lists the Python dependencies required for the project
-
+```
