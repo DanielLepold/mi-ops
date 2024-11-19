@@ -44,31 +44,56 @@ if upload is not None:
     print("Request results is: ")
     print(reg.json())
 
-    #data = pd.DataFrame.from_dict(json.loads(resp))
+    data = json.loads(
+      json.dumps(reg.json()))  # Ensure the JSON is parsed properly
+
+    metrics = data["metrics"]
+    print(f"metrics: {metrics}")
+
+    predictions = json.loads(data["predictions"])
+    df = pd.DataFrame(predictions)
+
+    # Alkalmazás címe
+    st.title("Iris Dataset Predictions")
+
+    # Táblázat megjelenítése
+    st.subheader("Prediction Results")
+    st.dataframe(df)  # Interaktív táblázat
+
+    # Alap statisztikák
+    st.subheader("Statistics")
+    st.write(df.describe())
+
+    # Szűrés: Csak adott osztályhoz tartozó predikciók
+    selected_class = st.selectbox("Select y_pred class",
+                                  options=sorted(df["y_pred"].unique()))
+    filtered_df = df[df["y_pred"] == selected_class]
+    st.subheader(f"Filtered Results (y_pred = {selected_class})")
+    st.dataframe(filtered_df)
     #st.table(data)
 
    #%% SCores
-    # col1, col2, col3, col4 = st.columns(4)
-    #
-    # with col1:
-    #     with st.container(border=True):
-    #         st.write("Precision")
-    #         st.write(precision_score(data["Origin"], data["y_pred"],average='micro'))
-    #
-    # with col2:
-    #     with st.container(border=True):
-    #         st.write("Accuracy")
-    #         st.write(accuracy_score(data["Origin"], data["y_pred"]))
-    #
-    # with col3:
-    #     with st.container(border=True):
-    #         st.write("F1 Score")
-    #         st.write(f1_score(data["Origin"], data["y_pred"], average='micro'))
-    #
-    # with col4:
-    #     with st.container(border=True):
-    #         st.write("Recall")
-    #         st.write(recall_score(data["Origin"], data["y_pred"],average='micro'))
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        with st.container(border=True):
+            st.write("Precision")
+            st.write(metrics["precision"])
+
+    with col2:
+        with st.container(border=True):
+            st.write("Accuracy")
+            st.write(metrics["accuracy"])
+
+    with col3:
+        with st.container(border=True):
+            st.write("F1 Score")
+            st.write(metrics["f1_score"])
+
+    with col4:
+        with st.container(border=True):
+            st.write("Recall")
+            st.write(metrics["recall"])
     #  #%% figures - heatmap
     # st.pyplot(ConfusionMatrixDisplay.from_predictions(data["Origin"], data["y_pred"]).figure_)
 

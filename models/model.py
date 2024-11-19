@@ -8,11 +8,12 @@ import pandas as pd
 
 # Load dataset
 data = load_iris()
-X = pd.DataFrame(data.data, columns=data.feature_names)  # Ensure DataFrame with feature names
+
+X = pd.DataFrame(data.data, columns=data.feature_names)
 y = data.target
 
 # Split dataset
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
 
 # Train a model
 model = DecisionTreeClassifier()
@@ -43,6 +44,14 @@ with mlflow.start_run(experiment_id=0) as run:
   mlflow.sklearn.log_model(model, "model")
   mlflow.log_param("input", X.columns.tolist())
   mlflow.log_param("signature", signature)
+
+  # Save y_test as CSV
+  y_test_df = pd.DataFrame({"y_test": y_test})
+  y_test_file = "y_test.csv"
+  y_test_df.to_csv(y_test_file, index=False)
+
+  # Log y_test as artifact
+  mlflow.log_artifact(y_test_file)
 
 
 

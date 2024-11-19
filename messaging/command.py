@@ -20,17 +20,19 @@ def post_data(data, queue_name, host="localhost", port=5672, user="guest",
 
 if __name__ == "__main__":
   url = "http://localhost:8000"
-  run_id = "6981f49373dc407ca81bf36dd6cf4908"
+  run_id = "75dbd4d7e945416da21fe99a90265c08"
   resp = requests.get(url + "/model/" + run_id)
   print(resp.content)
   print(resp)
   #
-  data = load_iris()
-  df = pd.DataFrame(data.data, columns=data.feature_names)
-
+  df = pd.read_csv("../models/iris_random_60_samples.csv",sep=";")
+  print(f"df: \n{df.tail(5)}")
+  print(f"df columns: {list(df.columns)}")
   # Convert to JSON
   data_json = df.to_json(
     orient="records")  # JSON-t rekordok listájaként alakítja át
+
+  print(f"data json: \n{data_json}")
 
   post_data(data_json, "iris")
   resp = requests.get(url + "/predict/iris")
