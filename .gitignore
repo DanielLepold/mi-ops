@@ -4,3 +4,4 @@ mlruns
 models/mlruns
 models/mlartifacts
 app/__pycache__
+app/mlartifacts

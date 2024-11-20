@@ -20,7 +20,7 @@ def post_data(data, queue_name, host="localhost", port=5672, user="guest",
 
 if __name__ == "__main__":
   url = "http://localhost:8000"
-  run_id = "75dbd4d7e945416da21fe99a90265c08"
+  run_id = "1389fa9a1c0f46c78eb1b351e6703991"
   resp = requests.get(url + "/model/" + run_id)
   print(resp.content)
   print(resp)
