@@ -1,4 +1,4 @@
-# mi-ops
+# ml-ops
 
 The project's goal is to show an User Interface (UI) that interactively displays the results of a machine learning (ML) model hosted on a server.
 The application allows users to analyze new data and provides easy access to the model's predictions.
@@ -15,7 +15,7 @@ This solution can be used as a base project for applications requiring effective
 ### File structure
 
 ```angular2html
-mi-ops/
+ml-ops/
 ├── app/                      # Application layer, including UI and server logic
 │   ├── __init__.py
 │   ├── ui.py                 # User Interface logic
@@ -54,7 +54,7 @@ http://127.0.0.1:5000.
 ### Model
 
 Create a model for Iris dataset and save it MLflow.
-Use the following command in the **mi-ops/models** folder:
+Use the following command in the **ml-ops/models** folder:
 
 ```python model.py```
 
@@ -64,7 +64,7 @@ You can get the run id in the **Overview** folder.
 
 ### Server
 
-In the mi-ops/app folder start the server with the help of the following command:
+In the ml-ops/app folder start the server with the help of the following command:
 
 ```python server.py```
 
@@ -89,7 +89,7 @@ It also calculates the metrics for the given input.
 
 I used the streamlite package for the creation of the user interface for handling new model input and showing results.
 
-In the **mi-ops/app** folder run the following command.
+In the **ml-ops/app** folder run the following command.
 
 ```streamlit run ui.py```
 
